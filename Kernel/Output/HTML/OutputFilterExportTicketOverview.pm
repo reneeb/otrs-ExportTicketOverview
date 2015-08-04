@@ -14,6 +14,7 @@ use warnings;
 
 our @ObjectDependencies = qw(
     Kernel::Output::HTML::Layout
+    Kernel::System::Web::Request
 );
 
 sub new {
@@ -44,30 +45,41 @@ sub Run {
                 CSV    => 'CSV',
                 Excel  => 'Excel',
             },
-            Name      => 'ExportResultForm',
-            Size      => 1,
-            HTMLQuote => 1,
+            Name         => 'ExportResultForm',
+            Size         => 1,
+            HTMLQuote    => 1,
+            AutoComplete => 'off',
         );
 
-        my ($Link) = ${$Param{Data}} =~ m{
-            <ul \s* class="OverviewZoom"> \s*
-              <li> \s*
-                <a .*? href="([^"]+)"
-        }xms;
+        my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
+        my @ParamNames  = $ParamObject->GetParamNames();
 
-        return 1 if $Link !~ m{Agent\w*TicketSearch};
+        my $Link = '';
+
+        NAME:
+        for my $Name ( @ParamNames ) {
+
+            next NAME if $Name eq 'ResultForm';
+
+            my @Values = $ParamObject->GetArray( Param => $Name );
+            $Link .= join '&', map{ sprintf "%s=%s", $Name, $LayoutObject->LinkEncode( $_ ) }@Values;
+            $Link .= '&';
+        }
+
+        return 1 if !$Link || $Link !~ m{Agent\w*TicketSearch};
 
         $LayoutObject->AddJSOnDocumentComplete(
            Code => qq~
                \$('#ExportResultForm').unbind('change');
                \$('#ExportResultForm').bind('change', function() {
-                   window.location.href = "$Link&ResultForm=" + \$(this).val();
+                   var BaseURL          = Core.Config.Get('Baselink');
+                   window.location.href = BaseURL + "$Link&ResultForm=" + \$(this).val();
                });
            ~, 
         );
 
         #scan html output and generate new html input
-        ${ $Param{Data} } =~ s{(<ul \s+ class="Actions"> \s* <li .*? /li>)}{$1 $Select}xmgs;
+        ${ $Param{Data} } =~ s{(<ul \s+ class="Actions"> \s* <li .*? /li>)}{$Select $1}xmgs;
     }
 
     return ${ $Param{Data} };
