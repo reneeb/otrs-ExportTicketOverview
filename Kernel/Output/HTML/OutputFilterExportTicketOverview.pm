@@ -13,14 +13,7 @@ use strict;
 use warnings;
 
 our @ObjectDependencies = qw(
-    Kernel::Config
-    Kernel::System::Encode
-    Kernel::System::Log
-    Kernel::System::Main
-    Kernel::System::Time
     Kernel::Output::HTML::Layout
-    Kernel::System::Web::Request
-    Kernel::System::Web::UploadCache
 );
 
 sub new {
@@ -36,9 +29,7 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
-    my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
-    my $LayoutObject      = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     # get template name
     my $Templatename = $Param{TemplateFile} || '';
@@ -53,9 +44,9 @@ sub Run {
                 CSV    => 'CSV',
                 Excel  => 'Excel',
             },
-            Name       => 'ExportResultForm',
-            Size         => 1,
-            HTMLQuote    => 1,
+            Name      => 'ExportResultForm',
+            Size      => 1,
+            HTMLQuote => 1,
         );
 
         my ($Link) = ${$Param{Data}} =~ m{

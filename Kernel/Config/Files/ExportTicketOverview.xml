@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
-<otrs_config version="1.0" init="Application">
-    <ConfigItem Name="Frontend::Output::FilterElementPost###OutputFilterCloseTicketView" Required="0" Valid="1">
+<otrs_config version="1.0" init="Config">
+    <ConfigItem Name="Frontend::Output::FilterElementPost###OutputFilterExportTicketOverview" Required="0" Valid="1">
         <Description Lang="en">Modul to show export dropdown in ticket overviews.</Description>
         <Description Lang="de">Modul zum Anzeigen des Export-Dropdowns in Ticketübersichten.</Description>
         <Group>ExportTicketOverview</Group>
