@@ -1,0 +1,23 @@
+=head1 NAME
+
+ExportTicketOverview
+
+=head1 DESCRIPTION
+
+If you search for tickets, you can specify the output format. But once you've chosen 'normal', there is no
+easy way to get e.g. the excel output. This addon fills this gap and provides a dropdown in most ticket
+overviews where you can select the format you want to get for the current ticket search.
+
+=head1 CODEREPOSITORY AND BUGTRACKER
+
+A coderepository and the bugtracker are available at L<https://github.com/reneeb/otrs-ExportTicketOverview/>.
+
+=head1 AUTHOR AND LICENSE
+
+This package was written by Renee Baecker E<lt>otrs@perl-services.deE<gt>.
+
+The package is licensed unter AGPL. If you
+did not receive this file, see L<http://www.gnu.org/licenses/agpl.txt>.
+
+=cut
+
