@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<otrs_config version="1.0" init="Config">
-    <ConfigItem Name="Frontend::Output::FilterElementPost###OutputFilterExportTicketOverview" Required="0" Valid="1">
+<otrs_config version="2.0" init="Config">
+    <Setting Name="Frontend::Output::FilterElementPost###OutputFilterExportTicketOverview" Required="0" Valid="1">
         <Description Lang="en">Modul to show export dropdown in ticket overviews.</Description>
         <Description Lang="de">Modul zum Anzeigen des Export-Dropdowns in Ticketübersichten.</Description>
-        <Group>ExportTicketOverview</Group>
-        <SubGroup>Core</SubGroup>
-        <Setting>
+        <Navigation>Core</Navigation>
+        <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::FilterElementPost::ExportTicketOverview</Item>
                 <Item Key="Debug">0</Item>
@@ -17,6 +16,6 @@
                     </Hash>
                 </Item>
             </Hash>
-        </Setting>
-    </ConfigItem>
+        </Value>
+    </Setting>
 </otrs_config>

@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2015 - 2017 Perl-Services.de, http://www.perl-services.de/
+# Copyright (C) 2015 - 2018 Perl-Services.de, http://www.perl-services.de/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -48,6 +48,7 @@ sub Run {
             Size         => 1,
             HTMLQuote    => 1,
             AutoComplete => 'off',
+            Class        => 'Modernize',
         );
 
         my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
